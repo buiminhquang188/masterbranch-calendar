@@ -8,28 +8,30 @@ const { Option } = Select;
 
 function getListData(value) {
   let listData;
+  console.log(value.month())
   switch (value.date()) {
     case 8:
       listData = [
-        { type: "warning", content: "This is warning event." },
-        { type: "success", content: "This is usual event." },
+        { type: "Appointment", content: "First Session with Alex Stand." },
+        {
+          type: "Event",
+          content: "Webinar: How to cope with trauma in professional life",
+        },
       ];
       break;
     case 10:
       listData = [
-        { type: "warning", content: "This is warning event." },
-        { type: "success", content: "This is usual event." },
-        { type: "error", content: "This is error event." },
+        { type: "Appointment", content: "First Session with Alex Stand." },
+        {
+          type: "Event",
+          content: "Webinar: How to cope with trauma in professional life",
+        },
       ];
       break;
     case 15:
       listData = [
-        { type: "warning", content: "This is warning event" },
-        { type: "success", content: "This is very long usual event。。...." },
-        { type: "error", content: "This is error event 1." },
-        { type: "error", content: "This is error event 2." },
-        { type: "error", content: "This is error event 3." },
-        { type: "error", content: "This is error event 4." },
+        { type: "Appointment", content: "First Session with Alex Stand." },
+        { type: "Event", content: "This is very long usual event。。...." },
       ];
       break;
     default:
@@ -71,6 +73,7 @@ function CalendarRight(props) {
     value: moment(moment(new Date()).format("YYYY-MM-DD")),
     selectedValued: moment(new Date()),
     isLoading: false,
+    isClicked: false,
   });
 
   const onSelect = (value) => {
@@ -86,64 +89,75 @@ function CalendarRight(props) {
   };
 
   const handleChangeMonthNP = (value) => {
-    console.log(value);
     let currentMonth = date.value;
     if (value) {
-      console.log("value state", date.value.format("YYYY-MM-DD"));
       let futureMonth = moment(currentMonth).add(1, "M").format("YYYY-MM-DD");
       setDate({
         value: moment(futureMonth),
+        isClicked: true,
       });
+      props.callBack(futureMonth);
     } else {
       let pastMonth = moment(currentMonth)
         .subtract(1, "M")
         .format("YYYY-MM-DD");
       setDate({
         value: moment(pastMonth),
+        isClicked: true,
       });
+      props.callBack(pastMonth);
     }
   };
 
-  const handleChangeMonth = (value) => {
-    console.log(value);
+  const handleCurrentDay = () => {
+    setDate({
+      value: moment(moment(new Date()).format("YYYY-MM-DD")),
+      isClicked: true,
+    });
+    props.callBack(date.value.format("YYYY-MM-DD"));
+    setDate({
+      ...date,
+      isClicked: false,
+    });
   };
-  console.log("render calendarright");
   return (
     <div className="calendarright">
       <Calendar
         headerRender={({ value, type, onChange, onTypeChange }) => {
           return (
             <div className="calendaerright__header">
-              <div className="flex p-4 text-lg">
-                <div>Today</div>
-                <div className="w-4 h-4 my-auto cursor-pointer ml-4">
+              <div className="flex p-4 text-sm">
+                <div>
+                  <button
+                    className="px-6 py-1 border-2 border-blue-450 rounded-lg cursor-pointer hover:text-blue-450"
+                    onClick={() => handleCurrentDay()}
+                  >
+                    Today
+                  </button>
+                </div>
+                <div className="w-6 h-6 my-auto cursor-pointer ml-4">
                   <ChevronLeftIcon
-                    className="w-full h-full"
+                    className="w-full h-full text-blue-450 hover:text-blue-950"
                     onClick={() => handleChangeMonthNP(false)}
                   />
                 </div>
-                <div className="w-4 h-4 my-auto cursor-pointer ml-4 mr-4">
+                <div className="w-6 h-6 my-auto cursor-pointer ml-4 mr-4">
                   <ChevronRightIcon
-                    className="w-full h-full"
+                    className="w-full h-full text-blue-450 hover:text-blue-950"
                     onClick={() => handleChangeMonthNP(true)}
                   />
                 </div>
-                <div>
-                  <Select
-                    value={date.value.format("MMMM")}
-                    style={{ width: 120 }}
-                    onChange={handleChangeMonth}
-                  >
-                    {moment.months().map((item) => (
-                      <Option key={item}>{item}</Option>
-                    ))}
-                  </Select>
+                <div className="text-2xl self-center font-bold text-blue-950">
+                  {date.value.format("MMM")}
                 </div>
-                <div className="ml-2">2021</div>
+                <div className="ml-2 self-center text-2xl  font-bold text-blue-950">
+                  {date.value.format("YYYY")}
+                </div>
                 <div className="ml-auto">
                   <Select
                     defaultValue="month"
                     onChange={(e) => onTypeChange(e)}
+                    className="calenderright__select"
                   >
                     <Option value="month">Month</Option>
                     <Option value="year">Year</Option>
@@ -157,6 +171,11 @@ function CalendarRight(props) {
         monthCellRender={monthCellRender}
         onSelect={onSelect}
         onPanelChange={onPanelChange}
+        value={
+          date.isClicked
+            ? date.value
+            : props.dataChange && moment(props.dataChange)
+        }
       />
     </div>
   );

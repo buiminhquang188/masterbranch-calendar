@@ -22,9 +22,8 @@ export default function MyCalendar() {
     });
   };
 
-  console.log("render mycalendar");
   return (
-    <div className="calendar bg-title h-screen py-2">
+    <div className="calendar bg-background h-screen py-2">
       <div className="sm:max-w-screen-sm md:max-w-screen-md lg:max-w-screen-2xl mx-auto container">
         <div className="grid grid-cols-12 gap-6">
           <div className="col-span-4">
@@ -53,7 +52,7 @@ export default function MyCalendar() {
                   }}
                 />
               </div>
-              <div className="calendarleft__upcoming">
+              <div className="calendarleft__upcoming bg-white py-2 border-2 border-gray-100">
                 <div className="calendarleft__wrapper p-3">
                   <div className="flex justify-between items-center">
                     <div>
@@ -69,7 +68,7 @@ export default function MyCalendar() {
                   </div>
                   <div className="flex justify-start">
                     <h3 className="text-xl text-left text-gray-400 font-semibold">
-                      Today, 4 Apr
+                      Today, {moment(new Date()).format("DD MMM")}
                     </h3>
                   </div>
                   <div className="flex flex-col gap-2">

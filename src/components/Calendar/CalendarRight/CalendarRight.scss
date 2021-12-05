@@ -27,4 +27,103 @@
   .ant-picker-calendar-header {
     display: none;
   }
+  .calendaerright__header {
+    .calenderright__select {
+      margin-right: 3px;
+      .ant-select-selector {
+        border: 2px solid #5684ae;
+        background: #5684ae;
+        border-radius: 8px;
+        padding: 0 14px;
+        color: white;
+        &:focus {
+          border-color: #5684ae;
+        }
+        &:hover {
+          transition: all ease 300ms;
+          border-color: #5684ae;
+        }
+      }
+      .ant-select-arrow {
+        color: white;
+      }
+    }
+  }
+  .ant-picker-body {
+    text-align: center;
+    padding: 0 0;
+    .ant-picker-content {
+      thead {
+        th {
+          padding: 12px 0;
+        }
+      }
+      tbody {
+        tr {
+          text-align: center;
+          font-size: 18px;
+          :first-child {
+            .ant-picker-cell-inner {
+              border-left: 2px solid #f0f0f0;
+            }
+          }
+        }
+        .ant-picker-cell-inner,
+        .ant-picker-calendar-date {
+          border-left: 2px solid #f0f0f0;
+          margin: 0;
+          padding: 4px 4px 0px 4px;
+          .events {
+            .ant-badge-status-Appointment + span {
+              border-left: 3px solid #0f4c81;
+              background: #ffe4c8;
+              border-radius: 7px;
+              padding: 4px 0px 4px 3px;
+              margin: 0;
+            }
+            .ant-badge-status-Event + span {
+              border-left: 3px solid #0f4c81;
+              background: #f9be81;
+              border-radius: 7px;
+              padding: 4px 0px 4px 3px;
+              margin: 0;
+            }
+          }
+        }
+        tr {
+          :last-child {
+            .ant-picker-cell-inner {
+              border-left: 2px solid #f0f0f0;
+              border-right: 2px solid #f0f0f0;
+            }
+          }
+        }
+        tr:last-child {
+          .ant-picker-cell-inner {
+            border-bottom: 2px solid #f0f0f0;
+          }
+        }
+        .ant-picker-calendar-date-today {
+          color: white;
+          border-color: #f0f0f0;
+          .ant-picker-calendar-date-value {
+            color: white;
+            background: #0f4c81;
+            border-radius: 100%;
+            width: fit-content;
+            padding: 2px 4px;
+            margin: 0 auto;
+          }
+        }
+        .ant-picker-cell-selected {
+          .ant-picker-cell-inner {
+            background: #e4f6ed;
+            .ant-picker-calendar-date-value {
+              color: black;
+            }
+          }
+        }
+      }
+    }
+  }
 }
