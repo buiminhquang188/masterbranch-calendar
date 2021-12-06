@@ -24,9 +24,9 @@ export default function MyCalendar() {
 
   return (
     <div className="calendar bg-background h-screen py-2">
-      <div className="sm:max-w-screen-sm md:max-w-screen-md lg:max-w-screen-2xl mx-auto container">
-        <div className="grid grid-cols-12 gap-6">
-          <div className="col-span-4">
+      <div className="lg:max-w-screen-2xl mm:max-w-screen-mm sm:max-w-screen-sm md:max-w-screen-md mx-auto container">
+        <div className="grid lg:grid-cols-12 gap-6">
+          <div className="mm:col-span-12 lg:col-span-4">
             <div className="calendarleft">
               <div className="site-calendar-demo-card">
                 <Calendar
@@ -152,7 +152,7 @@ export default function MyCalendar() {
               </div>
             </div>
           </div>
-          <div className="col-span-8">
+          <div className="mm:col-span-12 lg:col-span-8">
             <CalendarRight dataChange={data.data} callBack={callBack} />
           </div>
         </div>

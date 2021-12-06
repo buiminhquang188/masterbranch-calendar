@@ -4,7 +4,11 @@ module.exports = {
   theme: {
     extend: {
       screens: {
-        '2xl': '1400px',
+        'sm': '640px',
+        'md': '768px',
+        'lg': '1024px',
+        'xl': '1280px',
+        '2xl': '1536px',
       },
       colors: {
         title: "#E4F6ED",
